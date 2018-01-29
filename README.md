@@ -84,7 +84,7 @@ USE `client_messages`;
 ```
 ### Create a MySQL user
 
-Time to create a MySQL user to manipulate the database. Change `password` to something else! 
+Time to create a MySQL user to manipulate the database. Change `password` to something else!
 
 ```SQL
 CREATE USER 'client_messages_user'@'localhost' IDENTIFIED BY 'password';
@@ -103,8 +103,9 @@ FLUSH PRIVILEGES;
 
 ### Create our first SQL table
 
-```SQL
+We will break this down into the smaller segments. However, here is the first SQL table!
 
+```SQL
 DROP TABLE IF EXISTS `client_messages`.`users`;
 CREATE TABLE IF NOT EXISTS `client_messages`.`users` (
   `type`                CHAR(25) NOT NULL           DEFAULT ''                       COMMENT 'Type of User',
@@ -143,3 +144,94 @@ CREATE TABLE IF NOT EXISTS `client_messages`.`users` (
   KEY `updated` (`updated`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=UTF8 AUTO_INCREMENT=1;
 ```
+
+With this statement, we have it here even though it doesn't exist yet. Why? Because when you are first developing a new database, you might need to copy and paste the whole create SQL table creation statement over and over. So, having the `DELETE TABLE` statement there helps speed up time involved.
+```SQL
+DROP TABLE IF EXISTS `client_messages`.`users`;
+```
+
+We create the table, if it doesn't exist.
+
+```SQL
+CREATE TABLE IF NOT EXISTS `client_messages`.`users` (
+```
+
+Now to the SQL table's columns! First, the type of user. Could be admin, client, or anonymous (less than client as they aren't known). Some would suggest ENUM instead of CHAR however I would disagree with them on it is a limiting factor with the database to do that.
+
+```SQL
+  `type`                CHAR(25) NOT NULL           DEFAULT ''                       COMMENT 'Type of User',
+```
+
+Username/Email and Password. The username should be an email so they can be contacted back. This might change. For password, we encrypt it with a salt with PHP before we store it into MySQL.
+
+```SQL
+  `username`            CHAR(100) NOT NULL          DEFAULT ''                       COMMENT 'Username/Email',
+  `password`            CHAR(50) NOT NULL           DEFAULT ''                       COMMENT 'Encrypted Password',
+```
+
+First and Last Name. Not much to explain. I have did a maximum length tests on census data in the US and haven't ever found a first name or last name with over 50 characters so I have always set it to 50 chars.
+
+```SQL
+  `first_name`          CHAR(50) NOT NULL           DEFAULT ''                       COMMENT 'First Name',
+  `last_name`           CHAR(50) NOT NULL           DEFAULT ''                       COMMENT 'Last Name',
+```
+
+Some user location information about the person. Again, not much to it. With states, I store Pennsylvania as PA. So, the drop down would be similar to `<option value="PA">Pennsylvania</option>`
+
+```SQL
+  `street_address_1`    CHAR(255) NOT NULL          DEFAULT ''                       COMMENT 'Street Address (1)',
+  `street_address_2`    CHAR(255) NOT NULL          DEFAULT ''                       COMMENT 'Street Address (2)',
+  `city`                CHAR(255) NOT NULL          DEFAULT ''                       COMMENT 'City',
+  `state`               CHAR(2) NOT   NULL          DEFAULT ''                       COMMENT 'State',
+  `zip_code`            CHAR(10) NOT  NULL          DEFAULT ''                       COMMENT 'Zip Code',
+```
+
+Storing their phone is a good method for contacting them. Typically, we would do phone1, phone2, etc. **Or** we would do a separate table called `users_phones` which would have a foregin key (e.g. `id_user` ) that points back to `users`. Depends on usage.
+
+```SQL
+  `phone`               CHAR(45) NOT  NULL          DEFAULT ''                       COMMENT 'Phone',
+```
+
+With these two columns, we can mark if the user is verified (as in through an email verification) or if the user is deleted. This is purely binary. 0 means No. 1 means Yes. If a user is marked 1 in the deleted column, then that means they are deleted. If it is a 0, then they are not deleted. Default is 0 for deleted.
+
+```SQL
+  `is_verified`         INT(1)    NOT NULL          DEFAULT '0'                      COMMENT 'Is Verified',
+  `deleted`             INT(1)    NOT NULL          DEFAULT '0'                      COMMENT 'Is Deleted',
+```
+
+We store the datetime (e.g. 2018-01-29 16:38:00 [which is Jan 29th, 2018 14:38PM]) when the user is inserted (created) or updated. Normally, we would do a log (e.g. `users_log`) but this will suffice.
+
+```SQL
+  `inserted`            DATETIME NOT NULL           DEFAULT '0000-00-00 00:00:00'    COMMENT 'Inserted',
+  `updated`             DATETIME NOT NULL           DEFAULT '0000-00-00 00:00:00'    COMMENT 'Updated',
+```
+
+Ahhh, SQL Keys. When doing SQL queries, keys speed things up. I do make liberal use of keys for things I need to search for often. [Read more in the MySQL manual about SQL keys](https://dev.mysql.com/doc/refman/5.7/en/mysql-indexes.html)
+
+```SQL
+  PRIMARY KEY  (`id`),
+  KEY `type` (`type`),
+  KEY `username` (`username`),
+  KEY `password` (`password`),
+  KEY `first_name` (`first_name`),
+  KEY `last_name` (`last_name`),
+  KEY `birth_date` (`birth_date`),
+  KEY `street_address_1` (`street_address_1`),
+  KEY `street_address_2` (`street_address_2`),
+  KEY `city` (`city`),
+  KEY `state` (`state`),
+  KEY `zip_code` (`zip_code`),
+  KEY `phone` (`phone`),
+  KEY `is_verified` (`is_verified`),
+  KEY `deleted` (`deleted`),
+  KEY `inserted` (`inserted`),
+  KEY `updated` (`updated`)
+```
+
+Going to use MyISAM as the storage type and UTF8 for the character set
+
+```SQL
+) ENGINE=MyISAM  DEFAULT CHARSET=UTF8 AUTO_INCREMENT=1;
+```
+
+For now, that's the jist. More will come. Final edit: 2018-01-29 16:48:05
