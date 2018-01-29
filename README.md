@@ -10,7 +10,7 @@ Open your Terminal and run:
 
 ## Required and suggested software
 
-> For a one-liner, look at the end
+> For a one-liner, look [here](#the-one-liner)
 
 ### Apt
 
