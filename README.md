@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `client_messages`.`users` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=UTF8 AUTO_INCREMENT=1;
 ```
 
-With this statement, we have it here even though it doesn't exist yet. Why? Because when you are first developing a new database, you might need to copy and paste the whole create SQL table creation statement over and over. So, having the `DELETE TABLE` statement there helps speed up time involved.
+With this following statement, we have it here even though it doesn't exist yet. Why? Because when you are first developing a new database, you might need to copy and paste the whole create SQL table creation statement over and over. So, having the `DELETE TABLE` statement there helps speed up time involved.
 ```SQL
 DROP TABLE IF EXISTS `client_messages`.`users`;
 ```
