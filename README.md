@@ -14,7 +14,7 @@ Open your Terminal and run:
 
 ### Apt
 
-Then run this for getting apt:
+Apt is more polished than apt-get. Then run this for getting apt:
 
 `sudo apt-get install apt`
 
