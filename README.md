@@ -103,7 +103,7 @@ FLUSH PRIVILEGES;
 
 ### Create our first SQL table
 
-We will break this down into the smaller segments. However, here is the first SQL table!
+We will break this down into the smaller segments. However, here is the first SQL table! Copy this section and paste it into a file named `client_messages_user.sql` which you can open in your favorite editor. Geany is an IDE that would show the syntax correctly, for instance.
 
 ```SQL
 DROP TABLE IF EXISTS `client_messages`.`users`;
