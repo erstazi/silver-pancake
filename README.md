@@ -259,3 +259,13 @@ We need a **logs** table that can be used for keeping record of when users log i
  - message (TEXT column type)
  - inserted (DATETIME column type)
  - id (INT like id_user_from and id_user_to in as it is 20 digits and UNSIGNED)
+ 
+ ## Reference
+ 
+ - https://dev.mysql.com/doc/refman/5.7/en/
+   - https://dev.mysql.com/doc/refman/5.7/en/tutorial.html (Read the following: 3.1 Connecting to and Disconnecting from the Server, 3.2 Entering Queries, 3.3 Creating and Using a Database, 3.4 Getting Information About Databases and Tables, 3.5 Using mysql in Batch Mode, 3.6 Examples of Common Queries, 3.7 Using MySQL with Apache )
+   - https://dev.mysql.com/doc/refman/5.7/en/programs.html (Read the following: 4.1 Overview of MySQL Programs, 4.2 Using MySQL Programs, 4.3 MySQL Server and Server-Startup Programs, 4.4 MySQL Installation-Related Programs, 4.5 MySQL Client Programs, 4.6 MySQL Administrative and Utility Programs, 4.7 MySQL Program Development Utilities, 4.8 Miscellaneous Programs, 4.9 MySQL Program Environment Variables) 
+   - https://dev.mysql.com/doc/refman/5.7/en/server-administration.html (Read the following: 5.1 The MySQL Server, 5.2 The MySQL Data Directory, 5.3 The mysql System Database, 5.4 MySQL Server Logs, 5.5 MySQL Server Plugins, 5.6 Running Multiple MySQL Instances on One Machine, 5.7 Tracing mysqld Using DTrace)
+   - https://dev.mysql.com/doc/refman/5.7/en/security.html (Read the following: 6.1 General Security Issues, 6.2 The MySQL Access Privilege System, 6.3 MySQL User Account Management, 6.4 Using Encrypted Connections, 6.5 Security Plugins )
+   - https://dev.mysql.com/doc/refman/5.7/en/backup-and-recovery.html (Read the following: 7.1 Backup and Recovery Types, 7.2 Database Backup Methods, 7.3 Example Backup and Recovery Strategy, 7.4 Using mysqldump for Backups, 7.5 Point-in-Time (Incremental) Recovery Using the Binary Log, 7.6 MyISAM Table Maintenance and Crash Recovery)
+   - https://dev.mysql.com/doc/refman/5.7/en/data-types.html (Read the following: 11.1 Data Type Overview , 11.2 Numeric Types , 11.3 Date and Time Types , 11.4 String Types , 11.5 Spatial Data Types , 11.6 The JSON Data Type, 11.7 Data Type Default Values, 11.8 Data Type Storage Requirements, 11.9 Choosing the Right Type for a Column, 11.10 Using Data Types from Other Database Engines)
