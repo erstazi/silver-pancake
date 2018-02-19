@@ -246,15 +246,16 @@ We need a **messages** table that contains the columns (google the SQL types if 
  - id (INT like id_user_from and id_user_to in as it is 20 digits and UNSIGNED)
  
 We need a **notices** table that can be used for sending notices to users:
+ - type (CHAR that is 20 characters with default 'Regular'. Future: This will have Regular, Important, etc for type of notice)
+ - status (CHAR that is 20 characters with default 'Active'. Future: This will have Active, Deleted, etc)
  - id_user_from (INT matching the same 20 digits  and unsigned users table)
  - message (TEXT column type)
  - inserted (DATETIME column type)
- - status (CHAR that is 20 characters with default 'Active'. This will have Active, Deleted, etc)
  - id (INT like id_user_from and id_user_to in as it is 20 digits and UNSIGNED) 
  
 We need a **logs** table that can be used for keeping record of when users log in:
+ - type (CHAR that is 20 characters with default 'Log In'. Future: This will have Login, Sign Up, etc for type of logging)
  - id_user (INT matching the same 20 digits  and unsigned users table)
  - message (TEXT column type)
  - inserted (DATETIME column type)
- - type (CHAR that is 20 characters with default 'Log In'. This will have Login, Sign Up, etc for type of logging)
  - id (INT like id_user_from and id_user_to in as it is 20 digits and UNSIGNED)
